@@ -3,6 +3,11 @@ package com.example
 import java.net.URI
 import java.sql.{Connection, DriverManager}
 
+import javax.measure.unit.SI.KILOGRAM
+import javax.measure.quantity.Mass
+import org.jscience.physics.model.RelativisticModel
+import org.jscience.physics.amount.Amount
+
 import com.twitter.finagle.http.Response
 import com.twitter.finagle.{Http, Service}
 import com.twitter.util.{Await, Future}
@@ -31,8 +36,14 @@ class Hello extends Service[HttpRequest, HttpResponse] {
 
   def showHome(request: HttpRequest): Future[HttpResponse] = {
     val response = Response()
+    val helloWorld : String = "Hello from Scala!"
+
+    RelativisticModel.select()
+    val m = Amount.valueOf("12 GeV").to(KILOGRAM)
+
+    val conversion : String = "E=mc^2: 12 GeV = " + m
     response.setStatusCode(200)
-    response.setContentString("Hello from Scala!")
+    response.setContentString(helloWorld + "\n" + conversion)
     Future(response)
   }
 
