@@ -10,3 +10,4 @@ deploy:
   app: whispering-garden-8175
   on:
     repo: gef756/heroku-scala-getting-started
+    scala: 2.10.4
